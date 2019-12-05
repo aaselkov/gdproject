@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify
 
 from models import Man, db, Client
 
+index = Blueprint('index',__name__, url_prefix='/')
 api = Blueprint('api',__name__, url_prefix='/api')
 
 
@@ -27,3 +28,19 @@ def put_man(man_id, man_name):
 @api.route('/clients')
 def get_clients():
     return jsonify([(lambda client: client.json())(client) for client in Client.query.all()])
+
+
+@index.route('/')
+@index.route('/index')
+def get_index():
+    return '''
+            <html>
+                <title>
+                GD Project application web service
+                </title>
+                <body>
+                    <h3>API:</h3>
+                    <a href='./api/people'>People</a>
+                </body>
+            </html>
+           '''
