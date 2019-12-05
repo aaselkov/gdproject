@@ -36,14 +36,14 @@ class Client(db.Model):
     def json(self):
         return {'id': self.id, 'name': self.name, 'client type': self.clientType.json(), 'phone': self.phone}
 
-#
-# class Treaty(db.Model):
-#     __tablename__ = 'treaty'
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(120))
-#     date = db.Column(db.DateTime, default=datetime.utcnow)
-#     client = db.Column(db.Integer, ForeignKey('man.id'))
-#
-#     def json(self):
-#         return {'id': self.id, 'name': self.name,'date': self.date, 'client': self.client.json()}
+
+class Treaty(db.Model):
+    __tablename__ = 'treaty'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120))
+    clientId = db.Column(db.Integer, ForeignKey('client.id'))
+    client = relationship('Client')
+
+    def json(self):
+        return {'id': self.id, 'name': self.name, 'client': self.client.json()}
 
