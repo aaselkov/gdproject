@@ -1,10 +1,11 @@
 from flask import Flask
 
 from models import db, Man, Client
-from routes import api
+from routes import api, index
 
 app = Flask(__name__)
 app.register_blueprint(api)
+app.register_blueprint(index)
 db.init_app(app)
 with app.app_context():
     db.create_all()
