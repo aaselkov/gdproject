@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from models import Man, db, Client
+from models import Man, db, Client, Treaty, Type
 
 index = Blueprint('index',__name__, url_prefix='/')
 api = Blueprint('api',__name__, url_prefix='/api')
@@ -23,6 +23,11 @@ def put_man(man_id, man_name):
     db.session.add(man)
     db.session.commit()
     return 'done'
+
+
+@api.route('/treaty')
+def get_treaty():
+    return jsonify([(lambda treaty: treaty.json())(treaty) for treaty in Treaty.query.all()])
 
 
 @api.route('/clients')
