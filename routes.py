@@ -43,6 +43,14 @@ def new_client(cli_id, cli_name, cli_type, cli_phone):
     return 'done'
 
 
+@api.route('/type/new/<string:type_name>')
+def new_type(type_name):
+    typeNew = Type(name=type_name)
+    db.session.add(typeNew)
+    db.session.commit()
+    return 'done'
+
+
 @index.route('/')
 @index.route('/index')
 def get_index():
