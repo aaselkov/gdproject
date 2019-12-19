@@ -38,6 +38,9 @@ def get_clients():
 @api.route('/clients/new/<int:cli_id>,<string:cli_name>,<int:cli_type>,<string:cli_phone>')
 def new_client(cli_id, cli_name, cli_type, cli_phone):
     client = Client(id=cli_id, name=cli_name, clientTypeId=cli_type, phone=cli_phone)
+    db.session.add(client)
+    db.session.commit()
+    return 'done'
 
 
 @index.route('/')
