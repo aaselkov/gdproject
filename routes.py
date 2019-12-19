@@ -34,6 +34,9 @@ def get_treaty():
 def get_clients():
     return jsonify([(lambda client: client.json())(client) for client in Client.query.all()])
 
+@api.route('/clients/new')
+def new_client(cli_id, cli_name, cli_type, cli_phone):
+    client = Client(id=cli_id, name=cli_name, clientTypeId=cli_type, phone=cli_phone)
 
 @index.route('/')
 @index.route('/index')
